@@ -6,7 +6,7 @@ import tensorflow.keras as keras
 
 DATA_PATH = "data.json"
 LEARNING_RATE = 0.0001
-EPOCHS = 1
+EPOCHS = 40
 BATCH_SIZE = 32
 SAVED_MODEL_PATH = "model.h5"
 NUM_KEYWORDS = 8
