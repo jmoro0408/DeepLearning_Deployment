@@ -12,3 +12,4 @@ if __name__ == "__main__":
     data = response.json()
 
     print(f"Predicted keyword: {data['keyword']}")
+    
