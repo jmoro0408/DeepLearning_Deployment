@@ -11,6 +11,10 @@ The dataset used is the Google "Speech Commands" Dataset, and can be found [here
 
 The "prepare_dataset.py" file walks through the entire dataset folder ands creates a large json file with the command name ("up", "down", etc), the training label (i.e an integer representation of the command name - just the folder number in this case), the filename, and the mel-frequency cepstrum coefficients (MFCCS). Details on what MFCCs are can be found [here](https://medium.com/prathena/the-dummys-guide-to-mfcc-aceab2450fd) and [here](https://en.wikipedia.org/wiki/Mel-frequency_cepstrum), they are widely used in speech recognition. 
 
+An example of an MFCC for a 1 second voice clip is shown below. 
+
+![MFCC_plot](https://user-images.githubusercontent.com/66977019/120943078-9e420480-c6e1-11eb-8237-d43696bfb36b.png)
+
 
 ## Training 
 
