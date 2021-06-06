@@ -5,7 +5,6 @@ from keyword_spotting_service import Keyword_Spotting_Service
 
 app = Flask(__name__)
 
-
 @app.route("/predict", methods=["POST"])
 def predict():
 
@@ -30,3 +29,16 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=False)
+
+
+
+
+
+
+
+
+
+
+
+
+

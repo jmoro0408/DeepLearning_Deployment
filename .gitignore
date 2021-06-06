@@ -3,6 +3,7 @@ dataset/
 .vscode
 data.json
 speech_recognition.cer
+my_code/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -5,7 +5,6 @@ import numpy as np
 SAVED_MODEL_PATH = "model.h5"
 SAMPLES_TO_CONSIDER = 22050
 
-
 class _Keyword_Spotting_Service:
     """Singleton class for keyword spotting inference with trained models.
 
@@ -13,8 +12,20 @@ class _Keyword_Spotting_Service:
     """
 
     model = None
-    _mapping = ["down", "off", "on", "no", "yes", "up", "right", "left"]
+    _mapping = [
+        "down",
+        "off",
+        "on",
+        "no",
+        "yes",
+        "stop",
+        "up",
+        "right",
+        "left",
+        "go"
+    ]
     _instance = None
+
 
     def predict(self, file_path):
         """
@@ -35,6 +46,7 @@ class _Keyword_Spotting_Service:
         predicted_keyword = self._mapping[predicted_index]
         return predicted_keyword
 
+
     def preprocess(self, file_path, num_mfcc=13, n_fft=2048, hop_length=512):
         """Extract MFCCs from audio file.
 
@@ -54,9 +66,8 @@ class _Keyword_Spotting_Service:
             signal = signal[:SAMPLES_TO_CONSIDER]
 
             # extract MFCCs
-            MFCCs = librosa.feature.mfcc(
-                signal, sample_rate, n_mfcc=num_mfcc, n_fft=n_fft, hop_length=hop_length
-            )
+            MFCCs = librosa.feature.mfcc(signal, sample_rate, n_mfcc=num_mfcc, n_fft=n_fft,
+                                         hop_length=hop_length)
         return MFCCs.T
 
 
