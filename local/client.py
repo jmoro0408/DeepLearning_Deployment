@@ -1,6 +1,6 @@
 import requests
 
-URL = "http://public/ip/of/aws/instance/predict"
+URL = "http://3.15.233.166/predict"
 TEST_AUDIO_FILE_PATH = "test/left.wav"
 
 if __name__ == "__main__":
