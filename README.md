@@ -6,7 +6,6 @@ The project uses a simple convolutional neural network (CNN) to make predictions
 
 The dataset used is the Google "Speech Commands" Dataset, and can be found [here](https://ai.googleblog.com/2017/08/launching-speech-commands-dataset.html). 
 
-As this project is more about learning AWS and Docker, and I am less interested in the deep learning model portion, I cut down the training to only 8 commands (the full dataset has 10). 
 
 ## Preprocessing
 
@@ -19,7 +18,28 @@ A convolutional neural net (CNN) is trained by first splitting the dataset into 
 
 The model was saved as a model.h5 file for future predictions. 
 
-The model architecutre is shown below: 
+The model architecture is shown below: 
 
 ![model_figure](https://user-images.githubusercontent.com/66977019/120940143-a0e82e00-c6d0-11eb-8994-adf87c96cbef.png)
 
+## Making Predictions
+
+First I tested the predictions locally, using model.predict with some test audio files.  A client.py file simulates a client post request to a simple flask development server (server.py) that accepts temporarily stores the passed audio file, makes a prediction with the trained model, and pings back the predicted keyword back to the client before removing the audio file. 
+
+## NGINX and uWSGI
+
+A uWSGI server is placed between the client and the flask development server to implement the WSGI spec required by nginx. The flask app is then called by uwsgi when required.  A nice blog post detailing why we need uWSGI can be found [here](https://www.ultravioletsoftware.com/single-post/2017/03/23/An-introduction-into-the-WSGI-ecosystem). 
+
+
+NGINX is then placed in front of uWSGI, directly infront of the client. 
+The client fires a http post request with an audio file, nginx picks up the request and proxies it to uWSGI to call the flask app and make the prediction. 
+
+NGINX is then wrapped in its own Docker container, with uWSGI, flask and the Tensorflow model in a separate one. 
+
+## Deployment on AWS
+
+Finally all server side files are transferred to a standard Amazon web services EC2 instance and the docker. 
+
+# Conclusion
+
+This project was great as it had a greater focus on production deployment rather than on the deep learning aspect. Using Docker, Flask, AWS, and NGINX/uWSGI were all new aspects to me which I strive to include in future projects. 
