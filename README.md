@@ -13,7 +13,7 @@ The "prepare_dataset.py" file walks through the entire dataset folder ands creat
 
 An example of an MFCC for a 1 second voice clip is shown below. 
 
-<img src="https://user-images.githubusercontent.com/66977019/120943078-9e420480-c6e1-11eb-8237-d43696bfb36b.png" width = "500">
+<img src="https://user-images.githubusercontent.com/66977019/120943171-1c061000-c6e2-11eb-8060-b01df42367e7.png" width = "550">
 
 ## Training 
 
