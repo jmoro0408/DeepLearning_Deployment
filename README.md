@@ -18,3 +18,8 @@ The "prepare_dataset.py" file walks through the entire dataset folder ands creat
 A convolutional neural net (CNN) is trained by first splitting the dataset into training, test, and validation sets. The model was trained for 40 epochs and achieved an accuracy of 0.94 - this could certainly be improved but was deemed sufficient for this usage. 
 
 The model was saved as a model.h5 file for future predictions. 
+
+The model architecutre is shown below: 
+
+![model_figure](https://user-images.githubusercontent.com/66977019/120940143-a0e82e00-c6d0-11eb-8994-adf87c96cbef.png)
+
