@@ -1,9 +1,11 @@
 import json
 import numpy as np
-import tensorflow as tf
 from sklearn.model_selection import train_test_split
+import tensorflow as tf
+from tensorflow import keras
 
-DATA_PATH = "data.json"
+
+DATA_PATH = "local/classifier/data.json"
 SAVED_MODEL_PATH = r"/Users/James/Documents/Python/MachineLearningProjects/DeepLearning_Deployment/server/flask/model.h5"
 EPOCHS = 40
 BATCH_SIZE = 32
@@ -46,52 +48,52 @@ def build_model(
 ):
 
     # build network architecture using convolutional layers
-    model = tf.keras.models.Sequential()
+    model = keras.models.Sequential()
 
     # 1st conv layer
     model.add(
-        tf.keras.layers.Conv2D(
+        keras.layers.Conv2D(
             64,
             (3, 3),
             activation="relu",
             input_shape=input_shape,
-            kernel_regularizer=tf.keras.regularizers.l2(0.001),
+            kernel_regularizer=keras.regularizers.l2(0.001),
         )
     )
-    model.add(tf.keras.layers.BatchNormalization())
-    model.add(tf.keras.layers.MaxPooling2D((3, 3), strides=(2, 2), padding="same"))
+    model.add(keras.layers.BatchNormalization())
+    model.add(keras.layers.MaxPooling2D((3, 3), strides=(2, 2), padding="same"))
 
     # 2nd conv layer
     model.add(
-        tf.keras.layers.Conv2D(
+        keras.layers.Conv2D(
             32,
             (3, 3),
             activation="relu",
-            kernel_regularizer=tf.keras.regularizers.l2(0.001),
+            kernel_regularizer=keras.regularizers.l2(0.001),
         )
     )
-    model.add(tf.keras.layers.BatchNormalization())
-    model.add(tf.keras.layers.MaxPooling2D((3, 3), strides=(2, 2), padding="same"))
+    model.add(keras.layers.BatchNormalization())
+    model.add(keras.layers.MaxPooling2D((3, 3), strides=(2, 2), padding="same"))
 
     # 3rd conv layer
     model.add(
-        tf.keras.layers.Conv2D(
+        keras.layers.Conv2D(
             32,
             (2, 2),
             activation="relu",
-            kernel_regularizer=tf.keras.regularizers.l2(0.001),
+            kernel_regularizer=keras.regularizers.l2(0.001),
         )
     )
-    model.add(tf.keras.layers.BatchNormalization())
-    model.add(tf.keras.layers.MaxPooling2D((2, 2), strides=(2, 2), padding="same"))
+    model.add(keras.layers.BatchNormalization())
+    model.add(keras.layers.MaxPooling2D((2, 2), strides=(2, 2), padding="same"))
 
     # flatten output and feed into dense layer
-    model.add(tf.keras.layers.Flatten())
-    model.add(tf.keras.layers.Dense(64, activation="relu"))
-    tf.keras.layers.Dropout(0.3)
+    model.add(keras.layers.Flatten())
+    model.add(keras.layers.Dense(64, activation="relu"))
+    keras.layers.Dropout(0.3)
 
     # softmax output layer
-    model.add(tf.keras.layers.Dense(10, activation="softmax"))
+    model.add(keras.layers.Dense(10, activation="softmax"))
 
     optimiser = tf.optimizers.Adam(learning_rate=learning_rate)
 
@@ -101,6 +103,10 @@ def build_model(
     # print model parameters on console
     model.summary()
 
+    # plot model image
+    dot_img_file = "model_figure.png"
+    keras.utils.plot_model(model, to_file=dot_img_file, show_shapes=True)
+
     return model
 
 
@@ -108,7 +114,7 @@ def train(
     model, epochs, batch_size, patience, X_train, y_train, X_validation, y_validation
 ):
 
-    earlystop_callback = tf.keras.callbacks.EarlyStopping(
+    earlystop_callback = keras.callbacks.EarlyStopping(
         monitor="accuracy", min_delta=0.001, patience=patience
     )
 
@@ -150,7 +156,7 @@ def main():
     test_loss, test_acc = model.evaluate(X_test, y_test)
     print("\nTest loss: {}, test accuracy: {}".format(test_loss, 100 * test_acc))
 
-    # save model
+    save model
     model.save(SAVED_MODEL_PATH)
 
 
