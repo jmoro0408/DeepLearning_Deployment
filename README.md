@@ -41,7 +41,7 @@ NGINX is then wrapped in its own Docker container, with uWSGI, flask and the Ten
 
 ## Deployment on AWS
 
-Finally all server side files are transferred to a standard Amazon web services EC2 instance and the docker. 
+Finally all server side files are transferred to a standard Amazon web services EC2 instance and the docker compose file initiated. 
 
 # Conclusion
 
