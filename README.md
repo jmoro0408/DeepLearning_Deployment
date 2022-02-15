@@ -1,7 +1,7 @@
 # Deep Learning Deployment with Docker and AWS
 
 Small project to increase my knowledge of Docker and AWS deployment. 
-The project uses a simple convolutional neural network (CNN) to make predictions on some simple voice commands ("up", "down", "right", "left" and others). The code follows a "The Sound of AI" youtube tutorial. 
+The project uses a simple convolutional neural network (CNN) to make predictions on some simple voice commands ("up", "down", "right", "left" and others). 
 
 
 The dataset used is the Google "Speech Commands" Dataset, and can be found [here](https://ai.googleblog.com/2017/08/launching-speech-commands-dataset.html). 
